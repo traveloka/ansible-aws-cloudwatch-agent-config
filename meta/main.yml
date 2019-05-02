@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  description: generic configuration for streamin logs to CloudWatch Logs using cloudwatch-agent
+  company: Traveloka
+  min_ansible_version: 2.5
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+  categories:
+    - cloud
+    - cloud:ec2
+    - system
+  dependencies:
+    - ansible-aws-cloudwatch-agent
+    

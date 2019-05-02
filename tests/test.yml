@@ -1,0 +1,10 @@
+---
+- hosts: all
+  roles:
+    - role: ansible-aws-clouwatch-agent-config
+      aws_cwa_config_name: "syslog"
+      aws_cwa_logfiles:
+        - pathfile: "/var/log/syslog"
+          datetime_format: "%b %d %H:%M:%S"
+          group_name: "/tvlk/global/syslog"
+
