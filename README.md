@@ -55,11 +55,12 @@ None
     - hosts: servers
       roles:
         - role: ansible-aws-cloudwatch-agent-config
-          aws_cwa_config_name: "MetricSyslog"
+          aws_cwa_config_name: "syslog"
           aws_cwa_logfiles:
-            - pathfile: "/var/log/syslog"
-              timestamp_format: "%b %d %H:%M:%S"
-              group_name: "/tvlk/global/syslog"
+             - file_path: "/var/log/syslog"
+               log_group_name: "/tvlk/test/syslog.log"
+               timestamp_format: "%b %d %H:%M:%S"
+               timezone: "UTC"
 
 
     
