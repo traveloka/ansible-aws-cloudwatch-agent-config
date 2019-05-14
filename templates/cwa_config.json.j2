@@ -1,0 +1,35 @@
+{
+    "agent": {
+        "metrics_collection_interval": 15,
+        "logfile": "{{ aws_cwa_logfile_path }}"
+    }{% if aws_cwa_logfiles|length > 0 %},
+
+    "logs": {
+        "logs_collected": {
+            "files": {
+                "collect_list": [
+                {% for logfile in aws_cwa_logfiles %}
+                    {
+                        "file_path": "{{ logfile.file_path }}",
+                        "log_group_name": "{{ logfile.log_group_name }}",
+                        "log_stream_name": "{{ logfile.stream_name | default('{hostname}') }}",
+                        {% if logfile.timestamp_format is defined %}"timestamp_format": "{{ logfile.timestamp_format }}"{% if logfile.timezone is defined %},{% endif %}
+                        {% endif %}
+
+                        {% if logfile.timezone is defined %}"timezone": "{{ logfile.timezone }}"
+                            {% if logfile.multi_line_start_pattern is defined %},
+                            {% endif %}
+                        {% endif %}
+                        {% if logfile.multi_line_start_pattern is defined %}"multi_line_start_pattern": "{{ logfile.multi_line_start_pattern }}"
+                            {% if logfile.encoding is defined %},
+                            {% endif %}
+                        {% endif %}         
+                        {% if logfile.encoding is defined %}"encoding": "{{ logfile.encoding }}"
+                        {% endif %}
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}]
+            }
+        }
+    {% endif %}
+    }
+}
