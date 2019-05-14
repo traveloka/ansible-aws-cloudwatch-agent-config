@@ -2,7 +2,7 @@
 Configure amazon-cloudwatch-agent to stream the metrics and logfile to Cloudwatch dashboard.
 
 ## Requirements ##
-- **amazon-cloudwatch-agent** already installed. Role: https://github.com/traveloka/ansible-aws-cloudwatch-agent
+- amazon-cloudwatch-agent already installed. Role: https://github.com/traveloka/ansible-aws-cloudwatch-agent
 
 ## Role Variable ##
 
@@ -43,7 +43,7 @@ Configure amazon-cloudwatch-agent to stream the metrics and logfile to Cloudwatc
       value: /opt/aws/amazon-cloudwatch-agent
 
     - name: aws_cwa_logfile_path
-      desc: Path where amazon-cloudwatch-agent write it's log
+      desc: Path where amazon-cloudwatch-agent write the log
       value: /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
       
 ## Dependencies ##
