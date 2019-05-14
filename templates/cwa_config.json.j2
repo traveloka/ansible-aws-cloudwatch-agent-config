@@ -2,58 +2,6 @@
     "agent": {
         "metrics_collection_interval": 15,
         "logfile": "{{ aws_cwa_logfile_path }}"
-    },
-
-    "metrics": {
-        "namespace": "CWAgentNew",
-        "metrics_collected": {
-            "mem": {
-                "measurement": [
-                    {"name": "total", "rename": "Memory Total"},
-                    {"name": "used", "rename": "Memory Used"},
-                    {"name": "cached", "rename": "Memory Cached"},
-                    {"name": "free", "rename": "Memory Free"},
-                    {"name": "available", "rename": "Memory Available"}
-                ]
-            },
-
-            "disk": {
-                "measurement": [
-                    {"name": "total", "rename": "Disk Total"},
-                    {"name": "free", "rename": "Disk Free"},
-                    {"name": "inodes_total", "rename": "Disk Inodes Total"},
-                    {"name": "inodes_free", "rename": "Disk Inodes Free"}
-                ]
-            },
-
-            "diskio": {
-                "measurement": [
-                    {"name": "read_bytes", "rename": "Diskio Read Bytes"},
-                    {"name": "read_time", "rename": "Diskio Read Times"},
-                    {"name": "write_bytes", "rename": "Diskio Write Bytes"}, 
-                    {"name": "write_time", "rename": "Diskio Write Times"}
-                ]
-            },
-
-            "net": {
-                "measurement": [
-                    {"name": "bytes_recv", "rename": "Network Bytes In"},
-                    {"name": "bytes_sent", "rename": "Network Bytes Out"},
-                    {"name": "packets_recv", "rename": "Network Packets In"},
-                    {"name": "packets_sent", "rename": "Network Packets Out"}
-                ]
-            },
-
-            "processes": {
-                "measurement": [
-                    {"name": "total", "rename": "Processes Total"},
-                    {"name": "running", "rename": "Processes Running"},
-                    {"name": "stopped", "rename": "Processes Stopped"},
-                    {"name": "zombies", "rename": "Processes Zombies"}
-                ]
-            }
-
-        }
     }{% if aws_cwa_logfiles|length > 0 %},
 
     "logs": {
@@ -61,26 +9,27 @@
             "files": {
                 "collect_list": [
                 {% for logfile in aws_cwa_logfiles %}
-                {
-                    "file_path": "{{ logfile.pathfile }}",
-                    "log_group_name": "{{ logfile.group_name }}",
-                    {% if logfile.stream_name is defined %}
-                    "log_stream_name": "{{ logfile.stream_name }}",
-                    {% endif %}
-                    {% if logfile.timestamp_format is defined %}
-                    "timestamp_format": "{{ logfile.timestamp_format }}"
-                    {% endif %}
-                    {% if logfile.timezone is defined %}
-                    "timezone": "{{ logfile.timezone }}"
-                    {% endif %}
-                    {% if logfile.encoding is defined %}
-                    "encoding": "{{ logfile.encoding }}"
-                    {% endif %}
-                }{% if not loop.last %},{% endif %}
-                {% endfor %}
-                ]
+                    {
+                        "file_path": "{{ logfile.file_path }}",
+                        "log_group_name": "{{ logfile.log_group_name }}",
+                        "log_stream_name": "{{ logfile.stream_name | default('{hostname}') }}",
+                        {% if logfile.timestamp_format is defined %}"timestamp_format": "{{ logfile.timestamp_format }}"{% if logfile.timezone is defined %},{% endif %}
+                        {% endif %}
+
+                        {% if logfile.timezone is defined %}"timezone": "{{ logfile.timezone }}"
+                            {% if logfile.multi_line_start_pattern is defined %},
+                            {% endif %}
+                        {% endif %}
+                        {% if logfile.multi_line_start_pattern is defined %}"multi_line_start_pattern": "{{ logfile.multi_line_start_pattern }}"
+                            {% if logfile.encoding is defined %},
+                            {% endif %}
+                        {% endif %}         
+                        {% if logfile.encoding is defined %}"encoding": "{{ logfile.encoding }}"
+                        {% endif %}
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}]
             }
         }
-    }
     {% endif %}
+    }
 }
