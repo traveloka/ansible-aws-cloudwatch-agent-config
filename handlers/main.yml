@@ -1,6 +1,6 @@
 ---
 - name: restart amazon-cwa
-  shell: |
+  command: |
       amazon-cloudwatch-agent-ctl \
         -a append-config \
         -m ec2 \
