@@ -46,6 +46,10 @@ Configure amazon-cloudwatch-agent to stream the metrics and logfile to Cloudwatc
       desc: Path where amazon-cloudwatch-agent write the log
       value: /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
       
+    - name: aws_region
+      desc: Region where cloudwatch config uploaded to parameter store
+      value: ap-southeast-1
+      
 ## Dependencies ##
 
 None

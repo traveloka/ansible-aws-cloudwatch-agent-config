@@ -4,7 +4,7 @@
       amazon-cloudwatch-agent-ctl \
         -a append-config \
         -m ec2 \
-        -c "file:{{ aws_cwa_dest_path }}/etc/{{ aws_cwa_config_name }}.json" \
+        -c "ssm:{{ aws_cwa_config_name }}" \
         -s
   args:
       chdir: "{{ aws_cwa_dest_path }}/bin"
