@@ -1,12 +1,26 @@
 ---
-- name: "copy {{ aws_cwa_config_name }} configuration"
+- name: "create temporary {{ aws_cwa_config_name }} config file"
   become: yes
   become_method: sudo
   template:
     dest: "{{ aws_cwa_dest_path }}/etc/{{ aws_cwa_config_name }}.json"
     src: templates/cwa_config.json.j2
     mode: "0644"
-  notify: restart amazon-cwa
   tags:
     - cloudwatch-agent_config
+    
+- name: "upload {{ aws_cwa_config_name }} config to parameter store"
+  command: |
+    aws ssm --region "{{ aws_region }}" put-parameter \
+      --name "{{ aws_cwa_config_name }}" \
+      --type String --value "file://{{ aws_cwa_dest_path }}/etc/{{ aws_cwa_config_name }}.json" \ 
+      --overwrite
+  notify: restart amazon-cwa
+ 
+- name: "delete temporary {{ aws_cwa_config_name }} config file"
+  file:
+    path: "{{ aws_cwa_dest_path }}/etc/{{ aws_cwa_config_name }}.json"
+    state: absent
+  become: yes
+  become_method: sudo
   
