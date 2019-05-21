@@ -30,10 +30,10 @@ Configure amazon-cloudwatch-agent to stream the metrics and logfile to Cloudwatc
          default: Local
        
        - name: multi_line_start_pattern
-         desc: Specifies the pattern for identifying the start of a log message. A log message is made of a line that matches the pattern and any subsequent lines that don't match the pattern. 
+         desc: Optional. Specifies the pattern for identifying the start of a log message. A log message is made of a line that matches the pattern and any subsequent lines that don't match the pattern. 
          
        - name: encoding
-         desc: Specified the encoding of the log file so that it can be read correctly. If you specify an incorrect coding, there might be data loss because characters that can't be decoded are replaced with other characters.
+         desc: Optional. Specified the encoding of the log file so that it can be read correctly. If you specify an incorrect coding, there might be data loss because characters that can't be decoded are replaced with other characters.
          default: utf-8
     
 ### defaults ###
