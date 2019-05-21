@@ -59,7 +59,7 @@ None
     - hosts: servers
       roles:
         - role: ansible-aws-cloudwatch-agent-config
-          aws_cwa_config_name: "syslog"
+          aws_cwa_config_name: "tsi-cwa-config"
           aws_cwa_logfiles:
              - file_path: "/var/log/syslog"
                log_group_name: "/tvlk/test/syslog.log"
