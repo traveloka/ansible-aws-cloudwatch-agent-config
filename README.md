@@ -47,10 +47,6 @@ Configure amazon-cloudwatch-agent to stream logfiles to Cloudwatch dashboard.
       desc: Path where amazon-cloudwatch-agent write the log
       value: /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
       
-    - name: aws_region
-      desc: Region where parameter store uploaded
-      value: ap-southeast-1
-      
 ## Dependencies ##
 
 None
