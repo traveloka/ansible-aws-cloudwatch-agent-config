@@ -3,7 +3,6 @@ Configure amazon-cloudwatch-agent to stream logfiles to Cloudwatch dashboard.
 
 ## Requirements ##
 - amazon-cloudwatch-agent installed. Role: https://github.com/traveloka/ansible-aws-cloudwatch-agent
-- amazon-ssm installed
 
 ## Role Variable ##
 
@@ -46,10 +45,6 @@ Configure amazon-cloudwatch-agent to stream logfiles to Cloudwatch dashboard.
     - name: aws_cwa_logfile_path
       desc: Path where amazon-cloudwatch-agent write the log
       value: /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
-      
-    - name: aws_region
-      desc: Region where parameter store uploaded
-      value: ap-southeast-1
       
 ## Dependencies ##
 
