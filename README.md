@@ -3,7 +3,6 @@ Configure amazon-cloudwatch-agent to stream logfiles to Cloudwatch dashboard.
 
 ## Requirements ##
 - amazon-cloudwatch-agent installed. Role: https://github.com/traveloka/ansible-aws-cloudwatch-agent
-- amazon-ssm installed
 
 ## Role Variable ##
 
