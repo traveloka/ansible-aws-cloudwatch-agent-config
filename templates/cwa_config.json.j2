@@ -2,23 +2,6 @@
     "agent": {
         "metrics_collection_interval": 300,
         "logfile": "{{ aws_cwa_logfile_path }}"
-    },
-    
-    "metrics": {
-        "namespace": "CWAgent",
-        "metrics_collected": {
-            "mem": {
-                "measurement": [
-                    {"name": "used_percent", "rename": "Memory Used Percent", "unit": "Percent"}
-                ]
-            }
-        },
-
-        "append_dimensions": {
-            "InstanceId": "${aws:InstanceId}"
-        },
-
-        "aggregation_dimensions" : [[]]
     }{% if aws_cwa_logfiles|length > 0 %},
 
     "logs": {
