@@ -12,8 +12,8 @@
                     {
                         "file_path": "{{ logfile.file_path }}",
                         "log_group_name": "{{ logfile.log_group_name }}",
-                        "log_stream_name": "{{ logfile.stream_name | default('{local_hostname}') }}",
-                        {% if logfile.timestamp_format is defined %}"timestamp_format": "{{ logfile.timestamp_format }}"{% if logfile.timezone is defined %},{% endif %}
+                        "log_stream_name": "{{ logfile.stream_name | default('{local_hostname}') }}"
+                        {% if logfile.timestamp_format is defined %},"timestamp_format": "{{ logfile.timestamp_format }}"{% if logfile.timezone is defined %},{% endif %}
                         {% endif %}
 
                         {% if logfile.timezone is defined %}"timezone": "{{ logfile.timezone }}"
