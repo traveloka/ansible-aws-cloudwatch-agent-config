@@ -1,6 +1,6 @@
 {
     "agent": {
-        "metrics_collection_interval": 300,
+        "metrics_collection_interval": {{ aws_cwa_metrics_collection_interval }},
         "logfile": "{{ aws_cwa_logfile_path }}"
     }{% if aws_cwa_logfiles|length > 0 %},
 
@@ -19,7 +19,7 @@
                         {% if logfile.timezone is defined %},"timezone": "{{ logfile.timezone }}"
                         {%- endif -%}
                         {% if logfile.multi_line_start_pattern is defined %},"multi_line_start_pattern": "{{ logfile.multi_line_start_pattern }}"
-                        {%- endif -%}         
+                        {%- endif -%}
                         {% if logfile.encoding is defined %},"encoding": "{{ logfile.encoding }}"
                         {%- endif -%}
                     }{% if not loop.last %},{% endif -%}
