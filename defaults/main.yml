@@ -1,3 +1,4 @@
 ---
 aws_cwa_dest_path: /opt/aws/amazon-cloudwatch-agent
 aws_cwa_logfile_path: /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
+aws_cwa_metrics_collection_interval: 300
